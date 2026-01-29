@@ -1,0 +1,29 @@
+# File: Projet_IA/requirements.txt
+# This file lists all required Python libraries based on the original code.
+# Install with: pip install -r requirements.txt
+
+torch
+numpy
+json
+os
+random
+flask
+flask-cors
+pyngrok
+threading
+sys
+subprocess
+time
+wave
+zipfile
+cv2  # opencv-python
+mediapipe
+vosk
+moviepy
+tqdm
+yt-dlp
+glob
+datetime
+shutil
+re
+ipywidgets  # For tqdm in notebooks, but optional if not using Jupyter

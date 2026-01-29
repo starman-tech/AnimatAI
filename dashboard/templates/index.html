@@ -1,0 +1,45 @@
+<!-- dashboard/templates/index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Projet IA</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+        h1 { text-align: center; }
+        .buttons { display: flex; flex-direction: column; max-width: 300px; margin: auto; }
+        button { margin: 10px 0; padding: 10px; font-size: 16px; cursor: pointer; }
+        #logs { margin-top: 20px; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; background: white; }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Projet IA</h1>
+    <div class="buttons">
+        <button onclick="runAction('install')">Installer Dépendances</button>
+        <button onclick="runAction('train')">Lancer Entraînement</button>
+        <button onclick="runAction('mine')">Lancer Mining</button>
+        <button onclick="runAction('website')">Lancer Site Web</button>
+    </div>
+    <div id="logs">Logs...</div>
+
+    <script>
+        async function runAction(action) {
+            const res = await fetch(`/run/${action}`, { method: 'POST' });
+            const data = await res.json();
+            alert(data.status || data.error);
+        }
+
+        let allLogs = [];  // Accumulate logs
+        function updateLogs() {
+            fetch('/logs').then(res => res.json()).then(data => {
+                if (data.logs.length > 0) {
+                    allLogs = allLogs.concat(data.logs);
+                    document.getElementById('logs').innerHTML = allLogs.join('<br>');
+                    document.getElementById('logs').scrollTop = document.getElementById('logs').scrollHeight;
+                }
+            });
+        }
+        setInterval(updateLogs, 1000);  // Poll every second
+    </script>
+</body>
+</html>
