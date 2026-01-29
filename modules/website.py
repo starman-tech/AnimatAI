@@ -9,21 +9,14 @@ import random
 import json
 import numpy as np
 import cv2
-from flask import Flask, render_template_string, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from pyngrok import ngrok
 import torch
 import torch.nn as nn
-
-def install_setup():
-    pass
-
-install_setup()
-
 from vosk import Model, KaldiRecognizer
 
-
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 CORS(app)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -72,7 +65,8 @@ def load_model_logic():
 load_model_logic()
 
 @app.route('/')
-def index(): return render_template_string(html_code)
+def index():
+    return render_template('index.html')
 
 @app.route('/save_data', methods=['POST'])
 def save_data():
@@ -362,8 +356,6 @@ html_code = """
 """
 
 def run_website():
-    # Configurez votre token ngrok ici
-    # ngrok.authtoken("VOTRE_TOKEN_NGROK")  # Décommentez et remplacez par votre token
     app.run(port=5000)
 
 if __name__ == "__main__":

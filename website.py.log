@@ -1,0 +1,50 @@
+📂 Dossier données : /home/matte/Desktop/PROJECTS/AnimatAI/data
+🧠 Chemin modèle cherché : /home/matte/Desktop/PROJECTS/AnimatAI/models/face_model.pth
+✅ SUCCÈS : Modèle 58 chargé !
+Traceback (most recent call last):
+  File "/home/matte/Desktop/PROJECTS/AnimatAI/modules/website.py", line 362, in <module>
+    run_website()
+  File "/home/matte/Desktop/PROJECTS/AnimatAI/modules/website.py", line 359, in run_website
+    app.run(port=5000)
+  File "/home/matte/.local/lib/python3.12/site-packages/flask/app.py", line 662, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/home/matte/.local/lib/python3.12/site-packages/werkzeug/serving.py", line 1093, in run_simple
+    srv = make_server(
+          ^^^^^^^^^^^^
+  File "/home/matte/.local/lib/python3.12/site-packages/werkzeug/serving.py", line 930, in make_server
+    return ThreadedWSGIServer(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/matte/.local/lib/python3.12/site-packages/werkzeug/serving.py", line 792, in __init__
+    self.socket = socket.fromfd(fd, address_family, socket.SOCK_STREAM)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 548, in fromfd
+    return socket(family, type, proto, nfd)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+OSError: [Errno 88] Socket operation on non-socket
+📂 Dossier données : /home/matte/Desktop/PROJECTS/AnimatAI/data
+🧠 Chemin modèle cherché : /home/matte/Desktop/PROJECTS/AnimatAI/models/face_model.pth
+✅ SUCCÈS : Modèle 58 chargé !
+Traceback (most recent call last):
+  File "/home/matte/Desktop/PROJECTS/AnimatAI/modules/website.py", line 362, in <module>
+    run_website()
+  File "/home/matte/Desktop/PROJECTS/AnimatAI/modules/website.py", line 359, in run_website
+    app.run(port=5000)
+  File "/home/matte/.local/lib/python3.12/site-packages/flask/app.py", line 662, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/home/matte/.local/lib/python3.12/site-packages/werkzeug/serving.py", line 1093, in run_simple
+    srv = make_server(
+          ^^^^^^^^^^^^
+  File "/home/matte/.local/lib/python3.12/site-packages/werkzeug/serving.py", line 930, in make_server
+    return ThreadedWSGIServer(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/matte/.local/lib/python3.12/site-packages/werkzeug/serving.py", line 792, in __init__
+    self.socket = socket.fromfd(fd, address_family, socket.SOCK_STREAM)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 548, in fromfd
+    return socket(family, type, proto, nfd)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+OSError: [Errno 88] Socket operation on non-socket

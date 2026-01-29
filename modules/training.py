@@ -1,5 +1,4 @@
 # File: Projet_IA/modules/training.py
-# Unchanged
 import os
 import json
 import numpy as np

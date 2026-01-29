@@ -1,45 +1,275 @@
-<!-- dashboard/templates/index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Projet IA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-VRC CONTROL CENTER</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
-        h1 { text-align: center; }
-        .buttons { display: flex; flex-direction: column; max-width: 300px; margin: auto; }
-        button { margin: 10px 0; padding: 10px; font-size: 16px; cursor: pointer; }
-        #logs { margin-top: 20px; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; background: white; }
+        /* --- VARIABLES THEMES (MODÈLE IDENTIQUE) --- */
+        :root { --bg: #fff; --text: #000; }
+
+        body.theme-brutal {
+            --bg: #f2f2f2;
+            --surface: #ffffff;
+            --text: #121212;
+            --border: 3px solid #121212;
+            --shadow: 5px 5px 0px #121212;
+            --green: #4ade80;
+            --red: #ef4444;
+            --yellow: #facc15;
+            --blue: #3b82f6;
+            --font-main: 'Space Mono', monospace;
+            --radius: 0px;
+        }
+
+        body.theme-glass {
+            --bg: #0f172a;
+            --surface: rgba(30, 41, 59, 0.8);
+            --text: #e2e8f0;
+            --border: 1px solid rgba(148, 163, 184, 0.2);
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --green: #10b981;
+            --red: #f43f5e;
+            --yellow: #f59e0b;
+            --blue: #60a5fa;
+            --font-main: 'Inter', sans-serif;
+            --radius: 20px;
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+        }
+
+        /* --- GLOBAL --- */
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0; height: 100vh; overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: all 0.3s;
+        }
+
+        /* --- TOP BAR --- */
+        .top-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 30px; background: var(--surface); border-bottom: var(--border);
+            z-index: 50;
+        }
+        .logo-group { display: flex; align-items: center; gap: 15px; }
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; text-transform: uppercase; }
+
+        .top-actions button {
+            background: transparent; border: var(--border); color: var(--text);
+            padding: 8px 15px; cursor: pointer; font-family: inherit; font-weight: bold;
+            box-shadow: var(--shadow); margin-left: 10px; border-radius: var(--radius);
+        }
+        .top-actions button:active { transform: translate(2px, 2px); box-shadow: none; }
+
+        /* --- LAYOUT --- */
+        .main-container {
+            display: grid; grid-template-columns: 1fr 400px; gap: 20px; padding: 20px;
+            height: calc(100vh - 70px); box-sizing: border-box;
+        }
+
+        /* TERMINAL / LOGS AREA */
+        .log-wrapper {
+            display: flex; flex-direction: column; gap: 10px; height: 100%;
+        }
+        #terminal-window {
+            flex-grow: 1; background: #000; border: var(--border); border-radius: var(--radius);
+            box-shadow: var(--shadow); padding: 20px;
+            font-family: 'Space Mono', monospace; font-size: 13px; color: #0f0;
+            overflow-y: auto; white-space: pre-wrap;
+        }
+        .log-tabs { display: flex; gap: 10px; }
+        .tab-btn {
+            background: var(--surface); border: var(--border); color: var(--text);
+            padding: 8px 15px; cursor: pointer; border-radius: var(--radius);
+            font-family: inherit; font-size: 0.8rem; font-weight: bold;
+        }
+        .tab-btn.active { background: var(--blue); color: white; }
+
+        /* CONTROLS (RIGHT) */
+        .controls-wrapper { display: flex; flex-direction: column; gap: 15px; overflow-y: auto; }
+        .panel {
+            background: var(--surface); border: var(--border); padding: 20px;
+            border-radius: var(--radius); box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+        h3 { margin-top: 0; font-size: 0.9rem; text-transform: uppercase; opacity: 0.8; border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 5px; margin-bottom: 15px; }
+
+        .status-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 10px; }
+        .dot.RUNNING { background: var(--green); box-shadow: 0 0 10px var(--green); }
+        .dot.STOPPED { background: var(--red); }
+        .dot.FINISHED { background: var(--blue); }
+
+        .input-group label { font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 5px; opacity: 0.7; }
+        .input-group input {
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.05);
+            border: 1px solid var(--text); color: var(--text);
+            font-family: inherit; box-sizing: border-box; border-radius: 4px; margin-bottom: 10px;
+        }
+
+        .btn-big {
+            width: 100%; padding: 12px; border: var(--border); font-family: inherit; font-weight: bold; font-size: 0.9rem;
+            cursor: pointer; box-shadow: var(--shadow); border-radius: var(--radius); transition: all 0.2s; text-transform: uppercase;
+            display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 5px;
+        }
+        .btn-big:hover { transform: translateY(-2px); }
+        .btn-big:active { transform: translateY(2px); box-shadow: none; }
+        .btn-big:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+        
+        .btn-primary { background: var(--blue); color: white; }
+        .btn-success { background: var(--green); color: black; }
+        .btn-danger { background: var(--red); color: white; }
+
+        /* LOADER */
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+        /* TOAST */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 10000; }
+        .toast { background: var(--surface); border: var(--border); padding: 15px 25px; box-shadow: var(--shadow); margin-top: 10px; font-weight: bold; }
     </style>
 </head>
-<body>
-    <h1>Dashboard Projet IA</h1>
-    <div class="buttons">
-        <button onclick="runAction('install')">Installer Dépendances</button>
-        <button onclick="runAction('train')">Lancer Entraînement</button>
-        <button onclick="runAction('mine')">Lancer Mining</button>
-        <button onclick="runAction('website')">Lancer Site Web</button>
+<body class="theme-brutal">
+
+    <div id="loader" class="loader">
+        <i class="fas fa-terminal fa-3x fa-spin" style="margin-bottom: 20px; color: var(--blue);"></i>
+        <h2>CORE SYSTEM BOOTING...</h2>
     </div>
-    <div id="logs">Logs...</div>
+
+    <div class="top-bar">
+        <div class="logo-group">
+            <div class="logo"><i class="fas fa-hacker-news"></i> K-VRC // HUB</div>
+            <div style="font-size: 0.7rem; opacity: 0.6;">DASHBOARD V3.0</div>
+        </div>
+        <div class="top-actions">
+            <button onclick="toggleTheme()"><i class="fas fa-adjust"></i> STYLE</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        <div class="log-wrapper">
+            <div class="log-tabs">
+                <button class="tab-btn active" onclick="loadLog('website', this)">WEBSITE</button>
+                <button class="tab-btn" onclick="loadLog('mining', this)">DATA_MINER</button>
+                <button class="tab-btn" onclick="loadLog('training', this)">TRAINING</button>
+            </div>
+            <div id="terminal-window">Initialisation du flux de données...</div>
+        </div>
+
+        <div class="controls-wrapper">
+            
+            <div class="panel">
+                <h3><i class="fas fa-server"></i> État du Système</h3>
+                <div class="status-item">
+                    <span><span class="dot {{ status['website'] }}"></span> Web Server</span>
+                    <span style="font-weight: 800;">{{ status['website'] }}</span>
+                </div>
+                <div class="status-item">
+                    <span><span class="dot {{ status['mining'] }}"></span> Data Miner</span>
+                    <span style="font-weight: 800;">{{ status['mining'] }}</span>
+                </div>
+                <div class="status-item">
+                    <span><span class="dot {{ status['training'] }}"></span> Neural Net</span>
+                    <span style="font-weight: 800;">{{ status['training'] }}</span>
+                </div>
+                <hr style="opacity: 0.1; margin: 15px 0;">
+                <div class="status-item"><span>Fichiers Indexés:</span> <b>{{ n_files }}</b></div>
+                <div class="status-item"><span>Modèle IA:</span> <b>{{ "PRÊT" if model_ok else "MANQUANT" }}</b></div>
+            </div>
+
+            <div class="panel">
+                <h3><i class="fas fa-robot"></i> Interface Robot</h3>
+                <form action="/action/{{ 'stop_robot' if status['website'] == 'RUNNING' else 'start_robot' }}" method="POST">
+                    <button type="submit" class="btn-big {{ 'btn-danger' if status['website'] == 'RUNNING' else 'btn-success' }}">
+                        <i class="fas fa-power-off"></i> 
+                        {{ 'DÉSACTIVER LE ROBOT' if status['website'] == 'RUNNING' else 'INITIALISER LE ROBOT' }}
+                    </button>
+                </form>
+                <a href="http://localhost:5000" target="_blank" style="display:block; text-align:center; font-size:0.7rem; margin-top:10px; color:var(--blue); text-decoration:none;">ACCÉDER AU PORT 5000 <i class="fas fa-external-link-alt"></i></a>
+            </div>
+
+            <div class="panel">
+                <h3><i class="fas fa-cloud-download-alt"></i> Acquisition</h3>
+                <form action="/action/start_mining" method="POST">
+                    <button type="submit" class="btn-big btn-primary" {{ 'disabled' if status['mining'] == 'RUNNING' }}>
+                        <i class="fas fa-play"></i> EXECUTER LE MINAGE
+                    </button>
+                </form>
+                <div class="input-group" style="margin-top:15px;">
+                    <label>Injecter URL Youtube</label>
+                    <input type="text" id="urlInput" placeholder="https://youtube.com/...">
+                    <button type="button" class="btn-big" onclick="addUrl()" style="box-shadow:none; font-size:0.7rem; padding:5px;">+ AJOUTER À LA FILE</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3><i class="fas fa-brain"></i> Entraînement</h3>
+                <form action="/action/start_training" method="POST">
+                    <button type="submit" class="btn-big btn-primary" style="background: var(--yellow); color:black;" {{ 'disabled' if status['training'] == 'RUNNING' }}>
+                        <i class="fas fa-microchip"></i> START NEURAL TRAINING
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
 
     <script>
-        async function runAction(action) {
-            const res = await fetch(`/run/${action}`, { method: 'POST' });
-            const data = await res.json();
-            alert(data.status || data.error);
+        // --- THEMES & LOADER ---
+        window.toggleTheme = function() {
+            const b = document.body;
+            b.className = (b.classList.contains('theme-brutal')) ? 'theme-glass' : 'theme-brutal';
+            localStorage.setItem('hub_theme', b.className);
+        };
+        if(localStorage.getItem('hub_theme')) document.body.className = localStorage.getItem('hub_theme');
+
+        window.onload = () => {
+            setTimeout(() => document.getElementById('loader').style.display='none', 800);
+            showToast("SYSTÈME CONNECTÉ");
+        };
+
+        // --- NOTIFS ---
+        function showToast(msg) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast'; t.innerText = msg;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
         }
 
-        let allLogs = [];  // Accumulate logs
-        function updateLogs() {
-            fetch('/logs').then(res => res.json()).then(data => {
-                if (data.logs.length > 0) {
-                    allLogs = allLogs.concat(data.logs);
-                    document.getElementById('logs').innerHTML = allLogs.join('<br>');
-                    document.getElementById('logs').scrollTop = document.getElementById('logs').scrollHeight;
-                }
+        // --- URL INJECTION ---
+        function addUrl() {
+            const url = document.getElementById('urlInput').value;
+            if(!url) return showToast("ERREUR: URL VIDE");
+            const fd = new FormData(); fd.append('url', url);
+            fetch('/action/add_url', { method: 'POST', body: fd })
+                .then(res => {
+                    if(res.ok) { showToast("URL INJECTÉE"); document.getElementById('urlInput').value=""; }
+                });
+        }
+
+        // --- LOGS SYSTEM ---
+        let currentLog = 'website';
+        function loadLog(type, btn) {
+            currentLog = type;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            
+            fetch(`/logs/${type}`).then(res => res.text()).then(text => {
+                const term = document.getElementById('terminal-window');
+                term.innerText = text || "Aucune donnée log disponible...";
+                term.scrollTop = term.scrollHeight;
             });
         }
-        setInterval(updateLogs, 1000);  // Poll every second
+        setInterval(() => loadLog(currentLog), 2000);
     </script>
 </body>
 </html>
