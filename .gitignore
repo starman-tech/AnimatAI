@@ -1,0 +1,32 @@
+# Python cache et bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Environnements virtuels
+venv/
+env/
+.venv/
+ENV/
+
+# Fichiers sensibles
+.env
+*.env
+
+# VS Code et éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Autres (optionnels mais utiles)
+.DS_Store
+Thumbs.db
+*.tmp
