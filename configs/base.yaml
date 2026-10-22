@@ -1,0 +1,9 @@
+# Quality model: frozen multilingual speech encoder (mHuBERT-147) + causal TCN head.
+fps: 30
+frontend:
+  kind: ssl
+  model_id: utter-project/mHuBERT-147
+  layers: [6, 9, 12]
+data:
+  # Whole speakers never seen in training (one French, one English).
+  test_sources: [yt_qkuubDSa6go, yt_Y11SX2oHmw8]

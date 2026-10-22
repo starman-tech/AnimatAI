@@ -1,32 +1,18 @@
-# Python cache et bytecode
-__pycache__/
-*.py[cod]
-*$py.class
-*.pyo
-*.pyd
-
-# Logs
-*.log
-logs/
-*.log.*
-
-# Environnements virtuels
-venv/
-env/
 .venv/
-ENV/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+# data and training artefacts are reproducible / too large for git
+data/
+runs/
+*.mp4
+# trained packages: publish via releases, not git history
+models/*.pt
+models/**/*.onnx
 
-# Fichiers sensibles
-.env
-*.env
-
-# VS Code et éditeurs
+# editor settings
 .vscode/
-.idea/
-*.swp
-*.swo
 
-# Autres (optionnels mais utiles)
-.DS_Store
-Thumbs.db
-*.tmp
+# demo page embeds audio from third-party training videos: not redistributed
+demo.html

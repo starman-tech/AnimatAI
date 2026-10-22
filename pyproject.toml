@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "animatai"
+version = "1.0.0"
+description = "Audio-to-blendshape model for voice AIs, avatars and robot faces: train, fine-tune on a mimic, export, stream."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "soundfile>=0.12",
+    "pyyaml>=6",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+train = ["torch>=2.1", "transformers>=4.40"]
+mining = ["mediapipe>=0.10.9", "opencv-python", "yt-dlp"]
+export = ["onnx", "onnxruntime"]
+serve = ["flask", "flask-cors", "python-osc", "sounddevice"]
+dev = ["pytest", "ruff"]
+all = ["animatai[train,mining,export,serve,dev]"]
+
+[project.scripts]
+animatai = "animatai.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

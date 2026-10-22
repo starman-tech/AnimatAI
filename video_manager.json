@@ -4,20 +4,147 @@
         "id": "NubcYftsPFQ",
         "processed": true,
         "added_at": "2026-01-01 14:54:33.016938",
-        "segments": 42
+        "segments": 13
     },
     {
         "url": "https://www.youtube.com/watch?v=oMBQXmzVVAU",
         "id": "oMBQXmzVVAU",
-        "processed": false,
+        "processed": true,
         "added_at": "2026-01-01 14:54:33.017029",
-        "segments": 0
+        "segments": 23
     },
     {
         "url": "https://www.youtube.com/watch?v=AE6mdRV5QbE",
         "id": "AE6mdRV5QbE",
-        "processed": false,
+        "processed": true,
         "added_at": "2026-01-01 14:54:33.017044",
+        "segments": 37
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=qkuubDSa6go",
+        "id": "qkuubDSa6go",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215164",
+        "segments": 32
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=RC35Yr3qqEk",
+        "id": "RC35Yr3qqEk",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215177",
+        "segments": 46
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=hvrLd5KKm0s",
+        "id": "hvrLd5KKm0s",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215181",
+        "segments": 33
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=DcrWVdEABq8",
+        "id": "DcrWVdEABq8",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215183",
+        "segments": 17
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=VNkaGh7wQt0",
+        "id": "VNkaGh7wQt0",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215185",
+        "segments": 11
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=Y11SX2oHmw8",
+        "id": "Y11SX2oHmw8",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215187",
+        "segments": 32
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=RRDJO_UV4I8",
+        "id": "RRDJO_UV4I8",
+        "processed": true,
+        "added_at": "2026-09-19 23:19:36.215189",
+        "segments": 37
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=AYcqLymo6M4",
+        "id": "AYcqLymo6M4",
+        "processed": false,
+        "added_at": "2026-09-19 23:19:36.215191",
+        "segments": 0,
+        "error": "download failed"
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=83wYDzO3CzI",
+        "id": "83wYDzO3CzI",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891777",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=1QgC0xhSIF8",
+        "id": "1QgC0xhSIF8",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891796",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=y-kaOLKhDug",
+        "id": "y-kaOLKhDug",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891802",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=Ngat0CtgaqU",
+        "id": "Ngat0CtgaqU",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891807",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=Wzlpun1cf1Q",
+        "id": "Wzlpun1cf1Q",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891810",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=HyB2W_Mhjr4",
+        "id": "HyB2W_Mhjr4",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891814",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=IiDybHUTeMo",
+        "id": "IiDybHUTeMo",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891818",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=RTKtRNwoVSU",
+        "id": "RTKtRNwoVSU",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891821",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=ZGMmQWS4uhk",
+        "id": "ZGMmQWS4uhk",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891824",
+        "segments": 0
+    },
+    {
+        "url": "https://www.youtube.com/watch?v=Fg8ontRcT6Y",
+        "id": "Fg8ontRcT6Y",
+        "processed": false,
+        "added_at": "2026-09-20 00:22:45.891828",
         "segments": 0
     }
 ]

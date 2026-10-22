@@ -1,0 +1,37 @@
+# Example rig: a 7-servo robot head (angles in degrees). Copy and adapt the ranges to your mechanics.
+actuators:
+  jaw:
+    channels: {jawOpen: 1.0, mouthFunnel: 0.2}
+    input: [0.0, 0.7]
+    output: [90, 135]
+    max_speed: 600
+  mouth_corners:            # one servo pulling both corners: smile up, frown down
+    channels: {mouthSmileLeft: 0.5, mouthSmileRight: 0.5, mouthFrownLeft: -0.5, mouthFrownRight: -0.5}
+    input: [-0.6, 0.6]
+    output: [60, 120]
+    max_speed: 400
+  lips_pucker:
+    channels: {mouthPucker: 1.0, mouthFunnel: 0.5}
+    input: [0.0, 0.8]
+    output: [80, 110]
+    max_speed: 500
+  brows:
+    channels: {browInnerUp: 0.5, browOuterUpLeft: 0.25, browOuterUpRight: 0.25, browDownLeft: -0.5, browDownRight: -0.5}
+    input: [-0.6, 0.6]
+    output: [70, 110]
+    max_speed: 300
+  eyelids:
+    channels: {eyeBlinkLeft: 0.5, eyeBlinkRight: 0.5}
+    input: [0.0, 1.0]
+    output: [100, 40]      # reversed range: 100 = open, 40 = closed
+    max_speed: 1500
+  neck_yaw:
+    channels: {headYaw: 1.0}
+    input: [-1.0, 1.0]
+    output: [45, 135]
+    max_speed: 120
+  neck_pitch:
+    channels: {headPitch: 1.0}
+    input: [-1.0, 1.0]
+    output: [60, 120]
+    max_speed: 120

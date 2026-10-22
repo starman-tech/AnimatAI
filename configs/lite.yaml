@@ -1,0 +1,11 @@
+# Edge model: pure log-mel front-end, no torch needed at runtime (ONNX + numpy).
+fps: 30
+frontend:
+  kind: mel
+  n_mels: 80
+model:
+  d_model: 192
+  dropout: 0.2
+data:
+  # Whole speakers never seen in training (one French, one English).
+  test_sources: [yt_qkuubDSa6go, yt_Y11SX2oHmw8]
